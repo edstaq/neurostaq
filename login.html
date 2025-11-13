@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f8fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 15px;
+    }
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .logo {
+      width: 90px;
+      max-width: 30%;
+      margin: 0 auto 15px auto;
+    }
+    h2 {
+      color: #050F71;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    .student-info {
+      margin: 6px 0;
+      font-size: 1rem;
+      color: #333;
+      word-wrap: break-word;
+    }
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      display: block;
+    }
+    #error-message {
+      color: #D8000C; /* Red for errors */
+      background-color: #FFD2D2; /* Light red background */
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      text-align: center;
+      display: none; /* Hidden by default */
+    }    
+    button {
+      background-color: #050F71;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      display: block;
+    }
+    button:hover {
+      background-color: #0B177E;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      .student-info {
+        font-size: 0.95rem;
+      }
+      input, button {
+        font-size: 0.95rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Brand Logo -->
+    <div class="logo">
+      <svg width="100%" height="100%" viewBox="0 0 238 238" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M183.53 0C213.337 0.000148436 237.5 24.1631 237.5 53.9697V183.53C237.5 213.337 213.337 237.5 183.53 237.5H53.9697C24.1631 237.5 0.000148456 213.337 0 183.53V53.9697C0.000148456 24.1631 24.1631 0.000148436 53.9697 0H183.53ZM171.458 67.002C170.658 66.002 169.957 65.9023 168.856 66.9023C161.253 73.6021 153.55 80.1025 146.047 86.9023C138.844 93.5022 132.741 101.103 128.039 109.902C124.738 115.902 121.937 122.103 119.536 128.603C119.337 129.201 119.136 129.798 118.639 130.198C118.142 129.798 117.943 129.2 117.743 128.603C115.342 122.103 112.541 115.902 109.24 109.902C104.538 101.103 98.4352 93.5022 91.2324 86.9023C83.7294 80.1025 76.0259 73.6022 68.4229 66.9023C67.3224 65.9024 66.6216 66.002 65.8213 67.002C63.8206 69.6017 61.7198 72.202 59.6191 74.8018C58.9192 75.6016 59.2192 76.1026 59.8193 76.6025C64.221 80.5024 68.7229 84.5025 73.2246 88.4023C80.3275 94.6022 87.7307 100.402 93.333 108.202C95.734 111.502 98.5354 114.503 99.8359 118.603C99.2359 118.502 98.835 118.002 98.335 117.603C92.2326 112.203 85.63 107.302 78.3271 103.902C66.8225 98.5024 54.6168 94.6023 42.7119 89.9023C41.4114 89.4024 41.1107 90.102 40.8105 91.002C39.6101 94.2018 38.6096 97.3021 37.4092 100.502C37.0093 101.702 37.61 101.803 38.4102 102.103C43.3119 103.902 48.3141 105.802 53.2158 107.702C61.0189 110.802 69.0228 113.302 76.4258 117.502C82.3282 120.902 87.831 124.902 92.833 129.702C92.033 129.802 91.4324 129.302 90.7324 129.002C79.1277 123.802 67.1221 120.503 54.417 120.603C45.3133 120.703 36.3087 120.703 27.2051 120.603C25.6048 120.603 25.1046 121.002 25.1045 122.802C25.0941 130.902 25.1045 138.703 25.1045 146.603C34.5081 146.603 43.9122 146.803 53.2158 146.603C69.7226 146.303 84.0288 152.202 97.0342 162.202C103.881 167.28 109.37 172.508 118.579 172.503C118.599 172.503 118.62 172.502 118.64 172.502C118.66 172.502 118.68 172.502 118.7 172.502C127.909 172.507 133.398 167.28 140.245 162.202C153.25 152.202 167.557 146.303 184.063 146.603C193.367 146.803 202.771 146.603 212.175 146.603C212.175 138.703 212.185 130.902 212.175 122.802C212.175 121.002 211.675 120.603 210.074 120.603C200.97 120.703 191.966 120.703 182.862 120.603C170.157 120.503 158.152 123.802 146.547 129.002C145.847 129.302 145.246 129.802 144.446 129.702C149.448 124.902 154.951 120.902 160.854 117.502C168.256 113.302 176.26 110.802 184.063 107.702C188.965 105.802 193.967 103.902 198.869 102.103C199.669 101.803 200.27 101.702 199.87 100.502C198.67 97.3021 197.669 94.2018 196.469 91.002C196.169 90.102 195.868 89.4023 194.567 89.9023C182.663 94.6022 170.457 98.5024 158.952 103.902C151.649 107.302 145.047 112.203 138.944 117.603C138.444 118.002 138.043 118.503 137.443 118.603C138.744 114.503 141.545 111.502 143.946 108.202C149.549 100.402 156.952 94.6022 164.055 88.4023C168.556 84.5026 173.058 80.5023 177.46 76.6025C178.06 76.1026 178.36 75.6016 177.66 74.8018C175.559 72.202 173.459 69.6018 171.458 67.002Z" fill="url(#paint0_linear_91_34)"/>
+        <defs>
+          <linearGradient id="paint0_linear_91_34" x1="132.357" y1="-5.9138" x2="105.122" y2="243.394" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#132391"/>
+            <stop offset="0.5198" stop-color="#0B177E"/>
+            <stop offset="1" stop-color="#050F71"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <h2>Student Login</h2>
+
+    <input type="text" id="studentid" placeholder="Enter your student ID">
+    <input type="password" id="password" placeholder="Enter your password">
+    
+    <div id="error-message"></div>
+
+    <button>Login</button>
+
+    <!-- Loader (hidden by default) -->
+    <div id="loader" style="display:none; margin-top:15px;">
+    <span>⏳ Verifying...</span>
+  </div>
+  </div>
+
+  <script src="login.js" type="module"></script>
+</body>
+</html>

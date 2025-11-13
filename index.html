@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NeuroStaq Tracker</title>
+    <script>
+        // Check if a student is already logged in
+        const studentId = sessionStorage.getItem('studentId');
+        if (studentId) {
+            // If logged in, go to the tracker page
+            window.location.href = 'tracker.html';
+        } else {
+            // If not logged in, go to the login page
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <p>Loading...</p>
+</body>
+</html>
