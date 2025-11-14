@@ -37,6 +37,7 @@ async function handleLogin() {
 
         if (result.status === 'success') {
             localStorage.setItem('studentId', studentId);
+            localStorage.setItem('studentPassword', password);
             window.location.href = "tracker.html";
         } else {
             showError(result.message || "Invalid credentials. Please check your ID and password.");

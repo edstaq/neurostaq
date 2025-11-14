@@ -184,6 +184,7 @@ let storageKey = null;
 
 function handleLogout() {
     localStorage.removeItem('studentId');
+    localStorage.removeItem('studentPassword');
     window.location.href = 'login.html';
 }
 
@@ -262,14 +263,15 @@ async function initializeTracker() {
         window.location.href = 'login.html';
         return;
     }
+    
     storageKey = `trackerData_${studentId}`;
-
+    
     const loadingModal = getElement('loading-modal');
     loadingModal.style.display = 'flex';
-
+    
     const studentDetailsApi = `https://script.google.com/macros/s/AKfycbzq4wpWQ6UBunS0QG7oNrSlxKPrkcQd-vkmb7QtWfxFbzstY1v8nxDApIfvK2UwtL0B/exec?StudentID=${studentId}`;
     const trackerDataApi = `https://script.google.com/macros/s/AKfycbys2pBBtYJUe3ugIWnGTH10yd06m8jHCGlAGhFDBJhsVSrJA60Y2RECh2LZ1i0Ievbc/exec?StudentID=${studentId}`;
-
+    
     try {
         const [studentRes, trackerRes] = await Promise.all([
             fetch(studentDetailsApi),
@@ -278,7 +280,7 @@ async function initializeTracker() {
 
         const studentResult = await studentRes.json();
         const trackerResult = await trackerRes.json();
-
+        
         let studentDetails = studentResult.data;
         if (studentDetails && studentDetails.studentDetails) {
             studentDetails = studentDetails.studentDetails;
@@ -286,6 +288,18 @@ async function initializeTracker() {
         if (Array.isArray(studentDetails)) {
             studentDetails = studentDetails[0];
         }
+        
+        // checking old password and new password
+        const studentPassword = localStorage.getItem('studentPassword');
+        const apiPassword = studentDetails?.Password;
+
+        if (!apiPassword) {
+            console.warn("API did not return password field.");
+        } else if (apiPassword != studentPassword) {
+                handleLogout();
+        }
+
+        
 
         if (!studentDetails) {
             throw new Error(studentResult.message || 'Failed to fetch student details.');
