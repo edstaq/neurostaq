@@ -183,7 +183,7 @@ let storageKey = null;
 // --- EVENT HANDLERS ---
 
 function handleLogout() {
-    sessionStorage.removeItem('studentId');
+    localStorage.removeItem('studentId');
     window.location.href = 'login.html';
 }
 
@@ -257,7 +257,7 @@ function hideModal() {
 // --- INITIALIZATION ---
 
 async function initializeTracker() {
-    studentId = sessionStorage.getItem('studentId');
+    studentId = localStorage.getItem('studentId');
     if (!studentId) {
         window.location.href = 'login.html';
         return;

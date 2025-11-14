@@ -36,7 +36,7 @@ async function handleLogin() {
         const result = await response.json();
 
         if (result.status === 'success') {
-            sessionStorage.setItem('studentId', studentId);
+            localStorage.setItem('studentId', studentId);
             window.location.href = "tracker.html";
         } else {
             showError(result.message || "Invalid credentials. Please check your ID and password.");

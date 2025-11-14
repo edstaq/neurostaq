@@ -5,7 +5,7 @@
     <title>NeuroStaq Tracker</title>
     <script>
         // Check if a student is already logged in
-        const studentId = sessionStorage.getItem('studentId');
+        const studentId = localStorage.getItem('studentId');
         if (studentId) {
             // If logged in, go to the tracker page
             window.location.href = 'tracker.html';
