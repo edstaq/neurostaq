@@ -135,7 +135,7 @@ const createSection = (title, tasksByCategory) => {
     if (!subjectGroupsHtml) return '';
 
     return `
-        <details class="task-section" open>
+        <details class="task-section" >
             <summary>${title} <span class="task-count">${taskCount}</span></summary>
             <div class="section-content">${subjectGroupsHtml}</div>
         </details>
