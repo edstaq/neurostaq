@@ -46,6 +46,11 @@
                 <span>Dashboard</span>
             </a>
             
+            <button id="change-password-btn" class="change-password-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="change-password-icon"><path d="M12 15V18M12 6V12M12 6H15M12 6H9M12 12H15M12 12H9M12 15H15M12 15H9M18 6V18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span>Change Password</span>
+            </button>
+
             <button id="logout-btn" class="logout-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logout-icon"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6A2.25 2.25 0 0 0 5.25 5.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M15.75 9l-3.75-3.75M15.75 9l-3.75 3.75M15.75 9H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                 <span>Logout</span>
@@ -74,6 +79,32 @@
                 <button id="confirm-btn" class="modal-btn">Confirm</button>
                 <button id="cancel-btn" class="modal-btn">Cancel</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h3>Change Password</h3>
+            <form id="change-password-form">
+                <div class="form-group">
+                    <label for="old-password">Old Password</label>
+                    <input type="password" id="old-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-new-.password">Confirm New Password</label>
+                    <input type="password" id="confirm-new-password" required>
+                </div>
+                <p id="password-error-message" class="error-message" style="display: none;"></p>
+                <div class="modal-actions">
+                    <button type="submit" id="save-password-btn" class="modal-btn">Save Changes</button>
+                    <button type="button" id="cancel-password-btn" class="modal-btn">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 

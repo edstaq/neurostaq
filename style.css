@@ -11,6 +11,7 @@
     --brand-accent: #132391;
     --brand-light: #eef2f9;
     --success-color: #38a169;
+    --error-color: #e53e3e;
     --border-color: #e2e8f0;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-deep: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -81,7 +82,7 @@ body {
     color: var(--secondary-text);
 }
 
-.dashboard-btn, .logout-btn {
+.dashboard-btn, .change-password-btn, .logout-btn {
     width: 100%;
     display: flex;
     align-items: center;
@@ -99,19 +100,18 @@ body {
     text-decoration: none;
 }
 
-.dashboard-btn {
+/* .dashboard-btn{
     margin-bottom: 10px;
-}
+} */
 
-.logout-btn {
+.dashboard-btn, .logout-btn, .change-password-btn  {
     margin-top: auto;
 }
 
-.dashboard-btn:hover, .logout-btn:hover {
+.dashboard-btn:hover, .change-password-btn:hover, .logout-btn:hover {
     background-color: var(--brand-primary);
     color: #fff;
 }
-
 
 /* --- Main Content --- */
 .main-content {
@@ -320,7 +320,7 @@ details[open] > summary .task-count {
     stroke: currentColor;
 }
 
-/* --- Modals: Confirmation and Loading --- */
+/* --- Modals: Confirmation, Loading, and Change Password --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -372,22 +372,55 @@ details[open] > summary .task-count {
     transition: background-color 0.3s, color 0.3s;
 }
 
-#confirm-btn {
+#confirm-btn, #save-password-btn {
     background-color: var(--success-color);
     color: #fff;
 }
 
-#confirm-btn:hover {
+#confirm-btn:hover, #save-password-btn:hover {
     background-color: #2f855a;
 }
 
-#cancel-btn {
+#cancel-btn, #cancel-password-btn {
     background-color: var(--border-color);
     color: var(--primary-text);
 }
 
-#cancel-btn:hover {
+#cancel-btn:hover, #cancel-password-btn:hover {
     background-color: #cbd5e0;
+}
+
+#change-password-modal .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#change-password-modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--primary-text);
+}
+
+#change-password-modal input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+#change-password-modal input:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(5, 15, 113, 0.1);
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.9rem;
+    margin-bottom: 10px; /* Changed from margin-top to margin-bottom */
+    text-align: center;
 }
 
 /* Spinner for Loading Modal */

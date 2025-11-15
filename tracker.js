@@ -255,6 +255,51 @@ function hideModal() {
 }
 
 
+async function handleChangePassword(event) {
+    event.preventDefault();
+    const errorMessageElement = getElement('password-error-message');
+    errorMessageElement.style.display = 'none'; // Hide by default
+
+    const oldPassword = getElement('old-password').value;
+    const newPassword = getElement('new-password').value;
+    const confirmNewPassword = getElement('confirm-new-password').value;
+
+    if (newPassword !== confirmNewPassword) {
+        errorMessageElement.textContent = 'New passwords do not match.';
+        errorMessageElement.style.display = 'block';
+        return;
+    }
+
+    const saveButton = getElement('save-password-btn');
+    saveButton.textContent = 'Saving...';
+    saveButton.disabled = true;
+
+    const changePasswordApi = `https://script.google.com/macros/s/AKfycby9cOtD_w6OHRRmMytKZGYJSXIjHHVGlO0HAUIN0bGeKpOmGcgKPe-E6lsy5BPqx3Bi/exec?studentId=${studentId}&oldPassword=${oldPassword}&newPassword=${newPassword}`;
+
+    try {
+        const response = await fetch(changePasswordApi);
+        const result = await response.json();
+        
+
+        if (result["success"]===true) {
+            localStorage.setItem('studentPassword', newPassword);
+            alert('Password changed successfully!');
+            
+            getElement('change-password-modal').style.display = 'none';
+            getElement('change-password-form').reset();
+        } else {
+            throw new Error(result.message || 'Failed to change password.');
+        }
+    } catch (error) {
+        console.error('Password Change Error:', error);
+        errorMessageElement.textContent = error.message;
+        errorMessageElement.style.display = 'block';
+    } finally {
+        saveButton.textContent = 'Save Changes';
+        saveButton.disabled = false;
+    }
+}
+
 // --- INITIALIZATION ---
 
 async function initializeTracker() {
@@ -333,19 +378,67 @@ async function initializeTracker() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeTracker();
 
-    getElement('logout-btn').addEventListener('click', handleLogout);
-    getElement('tracker-data').addEventListener('click', handleMarkAsLearned);
-    getElement('confirm-btn').addEventListener('click', confirmAction);
-    getElement('cancel-btn').addEventListener('click', hideModal);
+    const logoutBtn = getElement('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
+    }
+
+    const trackerData = getElement('tracker-data');
+    if (trackerData) {
+        trackerData.addEventListener('click', handleMarkAsLearned);
+    }
+
+    const confirmBtn = getElement('confirm-btn');
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', confirmAction);
+    }
+
+    const cancelBtn = getElement('cancel-btn');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', hideModal);
+    }
+
+    const changePasswordBtn = getElement('change-password-btn');
+    if (changePasswordBtn) {
+        changePasswordBtn.addEventListener('click', () => {
+            const modal = getElement('change-password-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        });
+    }
+
+    const cancelPasswordBtn = getElement('cancel-password-btn');
+    if (cancelPasswordBtn) {
+        cancelPasswordBtn.addEventListener('click', () => {
+            const modal = getElement('change-password-modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            const form = getElement('change-password-form');
+            if(form) {
+                form.reset();
+            }
+            const errorMessageElement = getElement('password-error-message');
+            if (errorMessageElement) {
+                errorMessageElement.style.display = 'none';
+            }
+        });
+    }
+
+    const changePasswordForm = getElement('change-password-form');
+    if (changePasswordForm) {
+        changePasswordForm.addEventListener('submit', handleChangePassword);
+    }
 
     const appContainer = document.querySelector('.app-container');
     const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
     const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
 
-    if (sidebarToggleBtn) {
+    if (sidebarToggleBtn && appContainer) {
         sidebarToggleBtn.addEventListener('click', () => appContainer.classList.toggle('sidebar-open'));
     }
-    if (sidebarCloseBtn) {
+    if (sidebarCloseBtn && appContainer) {
         sidebarCloseBtn.addEventListener('click', () => appContainer.classList.remove('sidebar-open'));
     }
 });
